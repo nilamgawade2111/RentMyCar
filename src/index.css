@@ -1,0 +1,28 @@
+/* Design Tokens */
+:root {
+  --primary-color: hsl(210, 100%, 50%);
+  --secondary-color: hsl(210, 100%, 40%);
+  --text-color: hsl(0, 0%, 20%);
+  --background-color: hsl(0, 0%, 98%);
+  --font-family: 'Arial', sans-serif;
+}
+
+/* Global Styles */
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+/* Utility Classes */
+.btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--secondary-color);
+}

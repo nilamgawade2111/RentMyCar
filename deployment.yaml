@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rentmycar
+  namespace: default
+  labels:
+    app: rentmycar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rentmycar
+  template:
+    metadata:
+      labels:
+        app: rentmycar
+    spec:
+      containers:
+      - name: rentmycar
+        image: rentmycar:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        env:
+        - name: HOST
+          value: "0.0.0.0"
+        - name: SERVICE_NAME
+          value: "rentmycar"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        startupProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 20
+          periodSeconds: 5
+          failureThreshold: 50
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          failureThreshold: 3
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          failureThreshold: 6
+          timeoutSeconds: 3

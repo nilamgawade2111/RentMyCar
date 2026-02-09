@@ -10,8 +10,8 @@ const ContactForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
-      <div className="mb-4">
+    <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md max-w-md mx-auto">
+      <div className="mb-6">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
           Name
         </label>
@@ -20,7 +20,7 @@ const ContactForm = ({ onSubmit }) => {
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="Your Name"
         />
       </div>
@@ -33,11 +33,11 @@ const ContactForm = ({ onSubmit }) => {
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="Your Email"
         />
       </div>
-      <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+      <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline transition-all duration-300 hover:scale-105">
         Submit
       </button>
     </form>

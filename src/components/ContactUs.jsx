@@ -1,6 +1,5 @@
 import React from 'react';
 import ContactForm from './ContactForm';
-import SubmitButton from './SubmitButton';
 
 const ContactUs = () => {
   const handleSubmit = (formData) => {

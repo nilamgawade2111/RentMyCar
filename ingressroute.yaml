@@ -1,4 +1,4 @@
-apiVersion: traefik.io/v1alpha1
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: rentmycar-ingressroute
@@ -28,5 +28,23 @@ spec:
         - name: default-circuitbreaker
         - name: default-compress
         - name: default-buffering
+        - name: dev-headers
+    - match: Host(`rentmycar.framework.autopath.ai`)
+      kind: Rule
+      services:
+        - name: rentmycar
+          namespace: default
+          port: 8000
+          scheme: http
+          strategy: RoundRobin
+          healthCheck:
+            path: /
+            interval: 10s
+            timeout: 3s
+            scheme: http
+      middlewares:
+        - name: default-retry
+        - name: default-circuitbreaker
+        - name: default-compress
+        - name: default-buffering
         - name: default-headers
-

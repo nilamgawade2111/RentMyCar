@@ -1,21 +1,14 @@
 import React from 'react';
 
-function CarCard({ image, name, price, mileage, speed, fuel, transmission }) {
+const CarCard = ({ priceRange, modelDetails, averageInfo }) => {
   return (
-    <div className="flex bg-white rounded-lg shadow-subtle hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
-      <img src={image} alt={name} className="w-1/3 h-auto object-cover rounded-l-lg" />
-      <div className="p-4 w-2/3">
-        <h2 className="text-xl font-bold text-primary">{name}</h2>
-        <p className="text-secondary">{price}</p>
-        <ul className="text-secondary">
-          <li>Mileage: {mileage}</li>
-          <li>Speed: {speed}</li>
-          <li>Fuel: {fuel}</li>
-          <li>Transmission: {transmission}</li>
-        </ul>
-      </div>
+    <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1">
+      <h3 className="text-xl font-bold">{modelDetails.name}</h3>
+      <p className="text-gray-600">Price Range: {priceRange}</p>
+      <p className="text-gray-600">Mileage: {averageInfo.mileage}</p>
+      <p className="text-gray-600">Rating: {averageInfo.rating}</p>
     </div>
   );
-}
+};
 
 export default CarCard;

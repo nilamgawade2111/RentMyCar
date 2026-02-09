@@ -1,15 +1,11 @@
 import React from 'react';
-import ContactForm from './ContactForm';
 
 const ContactUs = () => {
-  const handleSubmit = (formData) => {
-    console.log('Form submitted:', formData);
-  };
-
   return (
-    <section className="bg-gradient-to-r from-soft-blue to-soft-pink py-20 text-center">
+    <section className="bg-gray-100 py-20 text-center">
       <h2 className="text-3xl font-bold mb-4">Contact Us</h2>
-      <ContactForm onSubmit={handleSubmit} />
+      <p className="text-lg">Email: contact@rentmycar.com</p>
+      <p className="text-lg">Phone: +1 (555) 123-4567</p>
     </section>
   );
 };

@@ -26,6 +26,7 @@ body {
 .btn:hover {
   background-color: var(--secondary-color);
 }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

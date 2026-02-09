@@ -12,7 +12,7 @@ const carData = [
 
 function CarDetails() {
   return (
-    <div className="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="p-8 bg-gray-100 grid grid-cols-1 md:grid-cols-2 gap-6">
       {carData.map(car => (
         <CarCard key={car.id} {...car} />
       ))}

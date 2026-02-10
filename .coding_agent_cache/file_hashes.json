@@ -7,15 +7,13 @@
   "package-lock.json": "93142850ef75ef73a28397e42aac44b1",
   "src/main.jsx": "1a42cec8a091f431110b01c9b2c624bf",
   "src/index.css": "c86aed52e322e39714fa38a1dfb68eed",
-  "src/App.jsx": "ab90bfc8a1eac92d9c0f9d5052353aa6",
+  "src/App.jsx": "ea46dfa0a6ee512caff20311b8de1361",
   "src/index.js": "1a42cec8a091f431110b01c9b2c624bf",
   "public/index.html": "09fad078faa1dec10d2f8aa9b2cb6e60",
   "src/components/ContactUs.jsx": "51b4e4810f5efb2213946707e36c53e8",
-  "src/components/Banner.jsx": "2279da02c139dd1c712e5e68e81d6bef",
-  "src/components/CarDetails.jsx": "c048e01c4d69338890c828c3d67294c5",
+  "src/components/Banner.jsx": "1df639b7c61d08b0e74dc46da4a43d5a",
+  "src/components/CarDetails.jsx": "89bef8b3036a3b972694cc26d870a418",
   ".coding_agent_cache/analysis_cache.json": "99914b932bd37a50b983c5e7c90ae93b",
-  ".coding_agent_cache/file_hashes.json": "bda36feb138be7bbacaab00756fe60c6",
-  ".coding_agent_cache/dependencies.json": "7fbfc8162528cc6dcf7cc6e9c7b91501",
-  "src/components/CarCard.jsx": "74f8c305bff89c941711a6a493da854f",
-  "src/data/carData.js": "401125b77606f6db86a4c6a1ef95159f"
+  ".coding_agent_cache/file_hashes.json": "6cd24ee1609a1d44c250d0a11802f3f3",
+  ".coding_agent_cache/dependencies.json": "7fbfc8162528cc6dcf7cc6e9c7b91501"
 }

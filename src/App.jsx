@@ -1,15 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ContactUsPage from './pages/ContactUsPage';
+import Banner from './components/Banner';
+import CarDetails from './components/CarDetails';
+import ContactUs from './components/ContactUs';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/contact" element={<ContactUsPage />} />
-        {/* Add other routes here */}
-      </Routes>
-    </Router>
+    <div className="text-center">
+      <Banner />
+      <CarDetails />
+      <ContactUs />
+    </div>
   );
 }
 

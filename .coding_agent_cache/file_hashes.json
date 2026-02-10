@@ -14,8 +14,8 @@
   "src/components/Banner.jsx": "2279da02c139dd1c712e5e68e81d6bef",
   "src/components/CarDetails.jsx": "c048e01c4d69338890c828c3d67294c5",
   ".coding_agent_cache/analysis_cache.json": "99914b932bd37a50b983c5e7c90ae93b",
-  ".coding_agent_cache/file_hashes.json": "6a0b5dc72813bea9ff4682edde58e3da",
+  ".coding_agent_cache/file_hashes.json": "072172bbdce2170add01efd17082c429",
   ".coding_agent_cache/dependencies.json": "7fbfc8162528cc6dcf7cc6e9c7b91501",
-  "src/components/CarCard.jsx": "264e91a537f0e164059e5f0f244b6154",
+  "src/components/CarCard.jsx": "49d1c206bfa8f411a85f22dd1b4fdbba",
   "src/data/carData.js": "401125b77606f6db86a4c6a1ef95159f"
 }

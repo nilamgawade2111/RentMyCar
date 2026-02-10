@@ -2,7 +2,7 @@ import React from 'react';
 
 function Banner() {
   return (
-    <div className="bg-blue-900 text-white text-center p-8 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:bg-opacity-90">
+    <div className="bg-gradient-to-r from-[#000080] to-[#36454F] text-white text-center p-8 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:bg-opacity-90">
       <h1 className="text-xl font-bold">Welcome to RentMyCar</h1>
       <p className="mt-4">Find the best rental cars at unbeatable prices.</p>
     </div>

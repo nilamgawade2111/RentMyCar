@@ -1,26 +1,22 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Banner from './components/Banner';
-import CarCard from './components/CarCard';
+import ContactUsPage from './pages/ContactUsPage';
 
 function App() {
-  const sampleCar = {
-    image: 'https://images.unsplash.com/photo-1549924231-f129b911e442?w=1200&h=800&fit=crop&auto=format',
-    name: 'Luxury Sedan',
-    pricePerDay: 100,
-    mileage: 15000,
-    averageSpeed: 120,
-    fuelType: 'Petrol',
-    transmission: 'Automatic'
-  };
-
   return (
     <Router>
-      <div className="App">
-        <Banner />
-        <div className="p-8">
-          <CarCard car={sampleCar} />
-        </div>
+      <div>
+        <nav className="bg-gray-800 p-4">
+          <ul className="flex space-x-4">
+            <li><Link to="/" className="text-white hover:text-gray-300">Home</Link></li>
+            <li><Link to="/contact" className="text-white hover:text-gray-300">Contact Us</Link></li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Banner />} />
+          <Route path="/contact" element={<ContactUsPage />} />
+        </Routes>
       </div>
     </Router>
   );

@@ -12,8 +12,9 @@
   "public/index.html": "09fad078faa1dec10d2f8aa9b2cb6e60",
   "src/components/ContactUs.jsx": "51b4e4810f5efb2213946707e36c53e8",
   "src/components/Banner.jsx": "2279da02c139dd1c712e5e68e81d6bef",
-  "src/components/CarDetails.jsx": "b1fd5f1c5d300fd22923ae80db01b912",
+  "src/components/CarDetails.jsx": "c048e01c4d69338890c828c3d67294c5",
   ".coding_agent_cache/analysis_cache.json": "99914b932bd37a50b983c5e7c90ae93b",
-  ".coding_agent_cache/file_hashes.json": "6cd24ee1609a1d44c250d0a11802f3f3",
-  ".coding_agent_cache/dependencies.json": "7fbfc8162528cc6dcf7cc6e9c7b91501"
+  ".coding_agent_cache/file_hashes.json": "33d917e7b95a9b7585e83011142d86a5",
+  ".coding_agent_cache/dependencies.json": "7fbfc8162528cc6dcf7cc6e9c7b91501",
+  "src/components/CarCard.jsx": "2f5bc4ae36989fc17a28f533278c3551"
 }

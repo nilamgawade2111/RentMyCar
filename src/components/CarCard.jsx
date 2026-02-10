@@ -10,8 +10,11 @@ function CarCard() {
           <img src={car.image} alt={car.name} className="w-full h-48 object-cover rounded-t-lg" />
           <div className="p-4">
             <h2 className="text-xl font-bold text-gray-800">{car.name}</h2>
-            <p className="text-gray-600 mt-2">{car.description}</p>
-            <p className="text-gray-800 font-semibold mt-4">Price: ${car.price}/day</p>
+            <p className="text-gray-600 mt-2">Price: ${car.price}/day</p>
+            <p className="text-gray-600">Mileage: {car.mileage} km</p>
+            <p className="text-gray-600">Speed: {car.speed} km/h</p>
+            <p className="text-gray-600">Fuel Type: {car.fuelType}</p>
+            <p className="text-gray-600">Transmission: {car.transmission}</p>
             <Link to={`/cars/${car.id}`} className="text-blue-500 hover:text-blue-700 mt-4 inline-block">View Details</Link>
           </div>
         </div>

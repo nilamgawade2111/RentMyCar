@@ -1,13 +1,13 @@
 import React from 'react';
 import Banner from './components/Banner';
-import CarDetailsPage from './components/CarDetailsPage';
+import CarDetails from './components/CarDetails';
 import ContactUs from './components/ContactUs';
 
 function App() {
   return (
     <div className="text-center">
       <Banner />
-      <CarDetailsPage />
+      <CarDetails />
       <ContactUs />
     </div>
   );

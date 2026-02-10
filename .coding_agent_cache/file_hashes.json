@@ -2,18 +2,12 @@
   "package.json": "e44c0e1014ccec348057bf973468f321",
   "index.html": "09fad078faa1dec10d2f8aa9b2cb6e60",
   "postcss.config.js": "64c039fe3db99b669a4ea32cfb0f1efa",
-  "vite.config.js": "53c19001e035a2d28df68818ccddf002",
+  "vite.config.js": "6f73205433f89e37fbfbe8d694600c99",
   "tailwind.config.js": "47322da74029768882ecd0f01ba4bc44",
   "package-lock.json": "93142850ef75ef73a28397e42aac44b1",
   "src/main.jsx": "1a42cec8a091f431110b01c9b2c624bf",
-  "src/index.css": "c09ed10c78bbe359f65578d55a8869ad",
-  "src/App.jsx": "ea46dfa0a6ee512caff20311b8de1361",
+  "src/index.css": "c486d72356568f8eeb6ba501b8f19a17",
+  "src/App.jsx": "fc86e238db9d7df3516c15ecda473b47",
   "src/index.js": "1a42cec8a091f431110b01c9b2c624bf",
-  "public/index.html": "09fad078faa1dec10d2f8aa9b2cb6e60",
-  "src/components/ContactUs.jsx": "2ba9e5292378346e3087fbcbe1179c1b",
-  "src/components/Banner.jsx": "9d051813b44bcd150f0b5cede0bfe72b",
-  "src/components/CarDetails.jsx": "f5635c7248c487294c4e7e216ed19298",
-  ".coding_agent_cache/analysis_cache.json": "99914b932bd37a50b983c5e7c90ae93b",
-  ".coding_agent_cache/file_hashes.json": "7721fa3d5e07027fc0e321810ab79a57",
-  ".coding_agent_cache/dependencies.json": "7fbfc8162528cc6dcf7cc6e9c7b91501"
+  "public/index.html": "09fad078faa1dec10d2f8aa9b2cb6e60"
 }

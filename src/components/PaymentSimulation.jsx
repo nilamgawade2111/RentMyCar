@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { format, differenceInDays } from 'date-fns';
+import { differenceInDays } from 'date-fns';
+import UserVerification from './UserVerification';
 
 const PaymentSimulation = ({ car }) => {
   const [startDate, setStartDate] = useState('');
@@ -8,6 +9,7 @@ const PaymentSimulation = ({ car }) => {
   const [error, setError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
 
   const calculatePrice = () => {
     if (startDate && endDate) {
@@ -27,6 +29,10 @@ const PaymentSimulation = ({ car }) => {
   };
 
   const handlePayment = () => {
+    if (!isVerified) {
+      setError('User verification is required before payment.');
+      return;
+    }
     setIsProcessing(true);
     setTimeout(() => {
       setPaymentSuccess(true);
@@ -65,9 +71,10 @@ const PaymentSimulation = ({ car }) => {
       <div className="mb-4">
         <p className="text-lg font-semibold text-gray-800">Total Price: ${totalPrice.toFixed(2)}</p>
       </div>
+      <UserVerification onVerificationSuccess={() => setIsVerified(true)} />
       <button
         className={`bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-all duration-300 ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
-        disabled={!startDate || !endDate || totalPrice <= 0 || isProcessing}
+        disabled={!startDate || !endDate || totalPrice <= 0 || isProcessing || !isVerified}
         onClick={handlePayment}
       >
         {isProcessing ? 'Processing...' : 'Simulate Payment'}

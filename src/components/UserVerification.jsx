@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PaymentGateway from './PaymentGateway';
 
-const UserVerification = () => {
+const UserVerification = ({ onVerificationSuccess }) => {
   const [isVerified, setIsVerified] = useState(false);
   const [verificationCode, setVerificationCode] = useState('');
   const [error, setError] = useState('');
@@ -15,6 +15,9 @@ const UserVerification = () => {
     if (verificationCode === '123456') {
       setIsVerified(true);
       setError('');
+      if (onVerificationSuccess) {
+        onVerificationSuccess();
+      }
     } else {
       setError('Invalid verification code. Please try again.');
     }

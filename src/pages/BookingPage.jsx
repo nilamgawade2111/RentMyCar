@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Payment from '../components/Payment';
+import PaymentSimulation from '../components/PaymentSimulation';
 import UserVerification from '../components/UserVerification';
 import { getAvailableCars } from '../utils/mockData';
+import BookingForm from '../components/BookingForm';
 
 function BookingPage() {
   const [startDate, setStartDate] = useState(null);
@@ -95,6 +96,7 @@ function BookingPage() {
                 <h2 className="text-2xl font-bold mb-2 text-gray-800">{car.name}</h2>
                 <p className="text-lg text-gray-600 mb-4">{car.description}</p>
                 <p className="text-lg font-semibold text-gray-800 mb-4">Price: {car.price}</p>
+                <BookingForm car={car} />
               </article>
             ))}
           </div>
@@ -103,7 +105,7 @@ function BookingPage() {
           <UserVerification />
         </section>
         <section>
-          <Payment />
+          <PaymentSimulation />
         </section>
       </main>
     </div>

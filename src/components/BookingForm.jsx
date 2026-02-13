@@ -3,6 +3,7 @@ import { format, differenceInDays } from 'date-fns';
 import { addBooking } from '../utils/mockData';
 import useRealTimeAvailability from '../hooks/useRealTimeAvailability';
 import UserVerification from './UserVerification';
+import PaymentSimulation from './PaymentSimulation';
 
 const BookingForm = ({ car }) => {
   const [startDate, setStartDate] = useState('');
@@ -52,6 +53,7 @@ const BookingForm = ({ car }) => {
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded"
+          disabled={loading}
         />
       </div>
       <div className="mb-4">
@@ -62,6 +64,8 @@ const BookingForm = ({ car }) => {
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded"
+          disabled={loading || !startDate}
+          min={startDate}
         />
       </div>
       {error && <p className="text-red-500 mb-4">{error}</p>}
@@ -78,6 +82,7 @@ const BookingForm = ({ car }) => {
         {loading ? 'Checking availability...' : 'Confirm Booking'}
       </button>
       <UserVerification />
+      <PaymentSimulation car={car} />
     </div>
   );
 };

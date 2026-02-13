@@ -15,5 +15,9 @@ export default defineConfig({
       }
     },
     base: '/rentmycar/',
+    assetsDir: 'assets',
+    outDir: 'dist',
+    emptyOutDir: true,
+    manifest: true,
   }
 });

@@ -18,6 +18,7 @@ function App() {
           <Route path="/booking/:carId" element={<BookingPage />} />
           <Route path="/about" element={<div>About Page</div>} />
           <Route path="/services" element={<div>Services Page</div>} />
+          <Route path="/booking" element={<BookingPage />} />
         </Routes>
         <Footer />
       </div>

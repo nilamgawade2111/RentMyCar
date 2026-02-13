@@ -5,6 +5,7 @@ const UserVerification = () => {
   const [isVerified, setIsVerified] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('');
   const [paymentStatus, setPaymentStatus] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleVerification = () => {
     if (verificationCode === '1234') {
@@ -17,8 +18,12 @@ const UserVerification = () => {
 
   const handlePayment = () => {
     if (paymentMethod && isVerified) {
-      setPaymentStatus('Payment Successful');
-      alert('Payment successful!');
+      setIsProcessing(true);
+      setTimeout(() => {
+        setPaymentStatus('Payment Successful');
+        setIsProcessing(false);
+        alert('Payment successful!');
+      }, 2000);
     } else {
       alert('Please select a payment method and complete verification.');
     }
@@ -63,10 +68,10 @@ const UserVerification = () => {
       <button
         type="button"
         onClick={handlePayment}
-        className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300"
-        disabled={!paymentMethod || !isVerified}
+        className={`w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
+        disabled={!paymentMethod || !isVerified || isProcessing}
       >
-        Make Payment
+        {isProcessing ? 'Processing...' : 'Make Payment'}
       </button>
       {paymentStatus && (
         <div className="mt-4 text-green-600 font-bold">

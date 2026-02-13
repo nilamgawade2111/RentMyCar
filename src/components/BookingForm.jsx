@@ -19,18 +19,25 @@ const BookingForm = () => {
   const [availability, setAvailability] = useState(true);
 
   useEffect(() => {
-    if (startDate && endDate) {
-      const days = Math.max(0, (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));
-      const pricePerDay = parseInt(car.price.replace('$', '').replace('/day', ''), 10);
-      setTotalPrice(days * pricePerDay);
+    const checkAvailability = () => {
+      if (startDate && endDate) {
+        const days = Math.max(0, (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));
+        const pricePerDay = parseInt(car.price.replace('$', '').replace('/day', ''), 10);
+        setTotalPrice(days * pricePerDay);
 
-      // Mock availability check
-      const unavailableDates = ['2023-12-25', '2023-12-31']; // Example unavailable dates
-      const isUnavailable = unavailableDates.some(date => 
-        new Date(date) >= new Date(startDate) && new Date(date) <= new Date(endDate)
-      );
-      setAvailability(!isUnavailable);
-    }
+        // Mock availability check
+        const unavailableDates = ['2023-12-25', '2023-12-31']; // Example unavailable dates
+        const isUnavailable = unavailableDates.some(date => 
+          new Date(date) >= new Date(startDate) && new Date(date) <= new Date(endDate)
+        );
+        setAvailability(!isUnavailable);
+      }
+    };
+
+    checkAvailability();
+    const interval = setInterval(checkAvailability, 5000);
+
+    return () => clearInterval(interval);
   }, [startDate, endDate, car.price]);
 
   const handleBooking = () => {

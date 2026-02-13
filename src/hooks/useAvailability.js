@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import mockCars from '../data/mockData';
+import mockCars from '../data/mockCars';
 
 const useAvailability = () => {
   const [availableCars, setAvailableCars] = useState([]);
@@ -7,16 +7,13 @@ const useAvailability = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Simulate fetching data from an API
     const fetchCars = async () => {
       try {
         setLoading(true);
-        // Simulating network delay
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        // Simulate real-time availability by randomly marking some cars as unavailable
         const updatedCars = mockCars.map(car => ({
           ...car,
-          available: Math.random() > 0.2, // 80% chance of being available
+          available: Math.random() > 0.2,
         }));
         setAvailableCars(updatedCars);
       } catch (err) {
@@ -27,7 +24,7 @@ const useAvailability = () => {
     };
 
     fetchCars();
-    const interval = setInterval(fetchCars, 5000); // Simulate real-time updates every 5 seconds
+    const interval = setInterval(fetchCars, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -40,7 +37,7 @@ const useAvailability = () => {
         ...updatedCars[carIndex],
         isBooked: true,
         bookingDetails: { startDate, endDate },
-        available: false, // Mark as unavailable once booked
+        available: false,
       };
       setAvailableCars(updatedCars);
       return true;

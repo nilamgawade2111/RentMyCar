@@ -1,40 +1,56 @@
 import React from 'react';
-import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 
-function Footer() {
+const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-navy-900 to-gray-800 text-white py-8">
-      <div className="container mx-auto px-4 text-center">
-        <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-4">
-          <Link to="/" className="text-white hover:text-gray-400 transition-colors duration-300">
-            Home
-          </Link>
-          <Link to="/about" className="text-white hover:text-gray-400 transition-colors duration-300">
-            About Us
-          </Link>
-          <Link to="/services" className="text-white hover:text-gray-400 transition-colors duration-300">
-            Services
-          </Link>
-          <Link to="/contact" className="text-white hover:text-gray-400 transition-colors duration-300">
-            Contact
-          </Link>
+    <footer className="bg-gray-800 text-white py-8">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="mb-4 md:mb-0">
+            <nav aria-label="Footer navigation">
+              <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+                <li>
+                  <Link to="/" className="hover:text-gray-400 transition-colors duration-300">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="hover:text-gray-400 transition-colors duration-300">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/services" className="hover:text-gray-400 transition-colors duration-300">
+                    Services
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="hover:text-gray-400 transition-colors duration-300">
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div className="flex space-x-4">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <FaFacebook className="text-2xl hover:text-gray-400 transition-colors duration-300" />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <FaTwitter className="text-2xl hover:text-gray-400 transition-colors duration-300" />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <FaInstagram className="text-2xl hover:text-gray-400 transition-colors duration-300" />
+            </a>
+          </div>
         </div>
-        <div className="flex justify-center space-x-6 mb-4">
-          <a href="https://www.facebook.com" aria-label="Facebook" className="text-white hover:text-blue-500 transition-colors duration-300">
-            <FaFacebookF size={24} />
-          </a>
-          <a href="https://www.twitter.com" aria-label="Twitter" className="text-white hover:text-blue-400 transition-colors duration-300">
-            <FaTwitter size={24} />
-          </a>
-          <a href="https://www.instagram.com" aria-label="Instagram" className="text-white hover:text-pink-500 transition-colors duration-300">
-            <FaInstagram size={24} />
-          </a>
+        <div className="mt-4 text-center text-sm text-gray-400">
+          &copy; {new Date().getFullYear()} RentMyCar. All rights reserved.
         </div>
-        <p className="text-sm">&copy; 2023 RentMyCar. All rights reserved.</p>
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;

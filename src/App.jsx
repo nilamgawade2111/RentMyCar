@@ -4,6 +4,7 @@ import Banner from './components/Banner';
 import CarDetails from './components/CarDetails';
 import ContactUs from './components/ContactUs';
 import BookingPage from './components/BookingPage';
+import Footer from './components/Footer';
 import mockCars from './data/mockCars';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/booking/:carId" element={<BookingPage car={mockCars[0]} />} />
           <Route path="/booking" element={<BookingPage />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

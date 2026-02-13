@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import mockCars from '../data/mockCars';
+import useAvailability from '../hooks/useAvailability';
 
 const BookingPage = () => {
   const { carId } = useParams();
@@ -11,6 +12,12 @@ const BookingPage = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [isVerified, setIsVerified] = useState(false);
+
+  const { availableCars, loading, error, bookCar } = useAvailability();
+  const isCarAvailable = availableCars.find((availableCar) => availableCar.id === car.id)?.available;
 
   useEffect(() => {
     if (startDate && endDate) {
@@ -21,12 +28,29 @@ const BookingPage = () => {
   }, [startDate, endDate, car.price]);
 
   const handleBooking = () => {
-    if (userName && userEmail && startDate && endDate && totalPrice > 0) {
-      alert(`Booking confirmed for ${car.name}!\nName: ${userName}\nEmail: ${userEmail}\nTotal Price: $${totalPrice}`);
+    if (userName && userEmail && startDate && endDate && totalPrice > 0 && paymentMethod && isVerified && isCarAvailable) {
+      const bookingSuccess = bookCar(car.id, startDate, endDate);
+      if (bookingSuccess) {
+        alert(`Booking confirmed for ${car.name}!\nName: ${userName}\nEmail: ${userEmail}\nTotal Price: $${totalPrice}`);
+      } else {
+        alert('Failed to book the car. Please try again.');
+      }
     } else {
-      alert('Please fill in all fields correctly.');
+      alert('Please fill in all fields correctly, complete verification, and ensure availability.');
     }
   };
+
+  const handleVerification = () => {
+    if (verificationCode === '1234') {
+      setIsVerified(true);
+      alert('Verification successful!');
+    } else {
+      alert('Invalid verification code.');
+    }
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
@@ -71,6 +95,42 @@ const BookingPage = () => {
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
       </div>
+      {!isCarAvailable && (
+        <div className="mb-4 text-red-600">
+          The selected car is not available for the chosen dates. Please choose different dates or another car.
+        </div>
+      )}
+      <div className="mb-4">
+        <label htmlFor="payment-method" className="block text-gray-700">Payment Method</label>
+        <select
+          id="payment-method"
+          value={paymentMethod}
+          onChange={(e) => setPaymentMethod(e.target.value)}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        >
+          <option value="">Select a payment method</option>
+          <option value="credit-card">Credit Card</option>
+          <option value="paypal">PayPal</option>
+          <option value="bank-transfer">Bank Transfer</option>
+        </select>
+      </div>
+      <div className="mb-4">
+        <label htmlFor="verification-code" className="block text-gray-700">Verification Code</label>
+        <input
+          type="text"
+          id="verification-code"
+          value={verificationCode}
+          onChange={(e) => setVerificationCode(e.target.value)}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+        <button
+          type="button"
+          onClick={handleVerification}
+          className="mt-2 w-full bg-green-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300"
+        >
+          Verify
+        </button>
+      </div>
       <div className="mb-4">
         <p className="text-lg text-gray-800">Total Price: <span className="font-bold">${totalPrice}</span></p>
       </div>
@@ -78,7 +138,7 @@ const BookingPage = () => {
         type="button"
         onClick={handleBooking}
         className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300"
-        disabled={!userName || !userEmail || !startDate || !endDate || totalPrice <= 0}
+        disabled={!userName || !userEmail || !startDate || !endDate || totalPrice <= 0 || !paymentMethod || !isVerified || !isCarAvailable}
       >
         Book Now
       </button>

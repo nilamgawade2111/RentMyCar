@@ -3,21 +3,19 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Banner from './components/Banner';
 import CarDetails from './components/CarDetails';
 import ContactUs from './components/ContactUs';
-import BookingPage from './pages/BookingPage';
-import CarListingPage from './pages/CarListingPage';
+import BookingPage from './components/BookingPage';
+import mockCars from './data/mockCars';
 
 function App() {
   return (
     <Router>
       <div className="text-center">
+        <Banner />
         <Routes>
-          <Route path="/" element={<Banner />} />
-          <Route path="/car-details" element={<CarDetails />} />
+          <Route path="/" element={<CarDetails />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/booking/:carId" element={<BookingPage car={mockCars[0]} />} />
           <Route path="/booking" element={<BookingPage />} />
-          <Route path="/cars" element={<CarListingPage />} />
-          <Route path="/about" element={<div>About Page</div>} />
-          <Route path="/services" element={<div>Services Page</div>} />
         </Routes>
       </div>
     </Router>

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Design Tokens */
 :root {
   --primary-color: hsl(210, 100%, 50%);
@@ -9,8 +10,6 @@
   --text-color: hsl(0, 0%, 20%);
   --background-color: hsl(0, 0%, 98%);
   --font-family: 'Arial', sans-serif;
-  --navy: hsl(210, 50%, 20%);
-  --charcoal: hsl(0, 0%, 15%);
 }
 
 /* Global Styles */
@@ -31,9 +30,4 @@ body {
 
 .btn:hover {
   background-color: var(--secondary-color);
-}
-
-/* Gradient Background for Banner */
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--navy), var(--charcoal));
 }

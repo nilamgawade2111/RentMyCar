@@ -5,27 +5,5 @@ export default defineConfig({
   plugins: [react()],
   server: {
     allowedHosts: ['rentmycar.framework.autopath.ai', 'rentmycar.localhost', 'localhost']
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        entryFileNames: 'assets/[name].js',
-        chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name].[ext]'
-      }
-    },
-    base: '/rentmycar/',
-    assetsDir: 'assets',
-    outDir: 'dist',
-    emptyOutDir: true,
-    manifest: true,
-  },
-  resolve: {
-    alias: {
-      '@': '/src'
-    }
-  },
-  esbuild: {
-    jsxInject: `import React from 'react'`
   }
 });

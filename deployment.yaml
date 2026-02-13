@@ -1,4 +1,3 @@
-yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,7 +20,7 @@ spec:
         image: rentmycar:latest
         imagePullPolicy: Never
         ports:
-        - containerPort: 80
+        - containerPort: 8000
         env:
         - name: HOST
           value: "0.0.0.0"
@@ -37,7 +36,7 @@ spec:
         startupProbe:
           httpGet:
             path: /
-            port: 80
+            port: 8000
           initialDelaySeconds: 20
           periodSeconds: 5
           failureThreshold: 50
@@ -45,7 +44,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /
-            port: 80
+            port: 8000
           initialDelaySeconds: 120
           periodSeconds: 10
           failureThreshold: 3
@@ -53,16 +52,8 @@ spec:
         readinessProbe:
           httpGet:
             path: /
-            port: 80
+            port: 8000
           initialDelaySeconds: 30
           periodSeconds: 5
           failureThreshold: 6
           timeoutSeconds: 3
-        volumeMounts:
-        - name: apache-config
-          mountPath: /usr/local/apache2/conf/httpd.conf
-          subPath: httpd.conf
-      volumes:
-      - name: apache-config
-        configMap:
-          name: apache-config

@@ -1,106 +1,102 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const mockCars = [
-  { id: 1, name: 'Toyota Camry', price: '$50/day' },
-  { id: 2, name: 'Honda Accord', price: '$55/day' },
-  { id: 3, name: 'Ford Mustang', price: '$70/day' },
-];
+const PaymentGateway = ({ car }) => {
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [isVerified, setIsVerified] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState('');
 
-const PaymentGateway = () => {
-  const [cardNumber, setCardNumber] = useState('');
-  const [expiryDate, setExpiryDate] = useState('');
-  const [cvv, setCvv] = useState('');
-  const [nameOnCard, setNameOnCard] = useState('');
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [error, setError] = useState('');
-  const [selectedCar, setSelectedCar] = useState(null);
+  const handleVerification = () => {
+    if (verificationCode === '1234') {
+      setIsVerified(true);
+      alert('Verification successful!');
+    } else {
+      alert('Invalid verification code.');
+    }
+  };
 
   const handlePayment = () => {
-    setIsProcessing(true);
-    setError('');
-
-    setTimeout(() => {
-      if (cardNumber && expiryDate && cvv && nameOnCard && selectedCar) {
-        setPaymentSuccess(true);
-        setIsProcessing(false);
-      } else {
-        setError('Please fill in all fields correctly.');
-        setIsProcessing(false);
-      }
-    }, 2000);
+    if (userName && userEmail && paymentMethod && isVerified) {
+      setPaymentStatus('Payment Successful');
+      alert(`Payment successful for ${car.name}!\nName: ${userName}\nEmail: ${userEmail}`);
+    } else {
+      alert('Please fill in all fields correctly and complete verification.');
+    }
   };
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Payment Gateway</h2>
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">{car.name} Payment Gateway</h2>
       <div className="mb-4">
-        <label htmlFor="car-selection" className="block text-gray-700 mb-2">Select Car</label>
+        <label htmlFor="user-name" className="block text-gray-700">Name</label>
+        <input
+          type="text"
+          id="user-name"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          aria-label="User Name"
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="user-email" className="block text-gray-700">Email</label>
+        <input
+          type="email"
+          id="user-email"
+          value={userEmail}
+          onChange={(e) => setUserEmail(e.target.value)}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          aria-label="User Email"
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="payment-method" className="block text-gray-700">Payment Method</label>
         <select
-          id="car-selection"
-          value={selectedCar?.id || ''}
-          onChange={(e) => setSelectedCar(mockCars.find(car => car.id === parseInt(e.target.value)))}
-          className="w-full p-2 border border-gray-300 rounded"
+          id="payment-method"
+          value={paymentMethod}
+          onChange={(e) => setPaymentMethod(e.target.value)}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          aria-label="Payment Method"
         >
-          <option value="" disabled>Select a car</option>
-          {mockCars.map(car => (
-            <option key={car.id} value={car.id}>{car.name} - {car.price}</option>
-          ))}
+          <option value="">Select a payment method</option>
+          <option value="credit-card">Credit Card</option>
+          <option value="paypal">PayPal</option>
+          <option value="bank-transfer">Bank Transfer</option>
         </select>
       </div>
       <div className="mb-4">
-        <label htmlFor="card-number" className="block text-gray-700 mb-2">Card Number</label>
+        <label htmlFor="verification-code" className="block text-gray-700">Verification Code</label>
         <input
           type="text"
-          id="card-number"
-          value={cardNumber}
-          onChange={(e) => setCardNumber(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-          placeholder="1234 5678 9012 3456"
+          id="verification-code"
+          value={verificationCode}
+          onChange={(e) => setVerificationCode(e.target.value)}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          aria-label="Verification Code"
         />
+        <button
+          type="button"
+          onClick={handleVerification}
+          className="mt-2 w-full bg-green-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300"
+        >
+          Verify
+        </button>
       </div>
-      <div className="mb-4">
-        <label htmlFor="expiry-date" className="block text-gray-700 mb-2">Expiry Date</label>
-        <input
-          type="text"
-          id="expiry-date"
-          value={expiryDate}
-          onChange={(e) => setExpiryDate(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-          placeholder="MM/YY"
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="cvv" className="block text-gray-700 mb-2">CVV</label>
-        <input
-          type="text"
-          id="cvv"
-          value={cvv}
-          onChange={(e) => setCvv(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-          placeholder="123"
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="name-on-card" className="block text-gray-700 mb-2">Name on Card</label>
-        <input
-          type="text"
-          id="name-on-card"
-          value={nameOnCard}
-          onChange={(e) => setNameOnCard(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-          placeholder="John Doe"
-        />
-      </div>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
       <button
-        className={`bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-all duration-300 ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
-        disabled={isProcessing}
+        type="button"
         onClick={handlePayment}
+        className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300"
+        disabled={!userName || !userEmail || !paymentMethod || !isVerified}
       >
-        {isProcessing ? 'Processing...' : 'Pay Now'}
+        Make Payment
       </button>
-      {paymentSuccess && <p className="text-green-500 mt-4">Payment Successful!</p>}
+      {paymentStatus && (
+        <div className="mt-4 text-green-600 font-bold">
+          {paymentStatus}
+        </div>
+      )}
     </div>
   );
 };

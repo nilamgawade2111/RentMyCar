@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import mockCars from '../data/mockCars';
+import mockCars from '../data/mockData';
+import PaymentGateway from './PaymentGateway';
+import UserVerification from './UserVerification';
 
 const BookingPage = () => {
   const { carId } = useParams();
@@ -20,8 +22,7 @@ const BookingPage = () => {
     const checkAvailability = () => {
       if (startDate && endDate) {
         const days = Math.max(0, (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));
-        const pricePerDay = parseInt(car.price.replace('$', '').replace('/day', ''), 10);
-        setTotalPrice(days * pricePerDay);
+        setTotalPrice(days * car.pricePerDay);
 
         const unavailableDates = ['2023-12-25', '2023-12-31'];
         const isUnavailable = unavailableDates.some(date => 
@@ -35,7 +36,7 @@ const BookingPage = () => {
     const interval = setInterval(checkAvailability, 5000);
 
     return () => clearInterval(interval);
-  }, [startDate, endDate, car.price]);
+  }, [startDate, endDate, car.pricePerDay]);
 
   const handleBooking = () => {
     if (userName && userEmail && startDate && endDate && totalPrice > 0 && paymentMethod && isVerified && availability) {
@@ -144,6 +145,8 @@ const BookingPage = () => {
       >
         Book Now
       </button>
+      <PaymentGateway car={car} />
+      <UserVerification />
     </div>
   );
 };

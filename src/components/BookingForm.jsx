@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import mockCars from '../data/mockCars';
+import PaymentGateway from './PaymentGateway';
+import UserVerification from './UserVerification';
 
 const BookingForm = () => {
   const { carId } = useParams();
@@ -138,6 +140,8 @@ const BookingForm = () => {
       >
         Book Now
       </button>
+      <PaymentGateway car={car} />
+      <UserVerification />
     </div>
   );
 };

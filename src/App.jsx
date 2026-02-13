@@ -5,7 +5,7 @@ import CarDetails from './components/CarDetails';
 import ContactUs from './components/ContactUs';
 import BookingPage from './components/BookingPage';
 import Footer from './components/Footer';
-import mockCars from './data/mockCars';
+import CarList from './components/CarList';
 
 function App() {
   return (
@@ -13,10 +13,11 @@ function App() {
       <div className="text-center">
         <Banner />
         <Routes>
-          <Route path="/" element={<CarDetails />} />
+          <Route path="/" element={<CarList />} />
           <Route path="/contact" element={<ContactUs />} />
-          <Route path="/booking/:carId" element={<BookingPage car={mockCars[0]} />} />
-          <Route path="/booking" element={<BookingPage />} />
+          <Route path="/booking/:carId" element={<BookingPage />} />
+          <Route path="/about" element={<div>About Page</div>} />
+          <Route path="/services" element={<div>Services Page</div>} />
         </Routes>
         <Footer />
       </div>

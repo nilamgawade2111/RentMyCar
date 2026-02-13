@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import mockCars from '../data/mockCars';
+import mockCars from '../data/mockData';
 
 const useAvailability = () => {
   const [availableCars, setAvailableCars] = useState([]);
@@ -27,6 +27,9 @@ const useAvailability = () => {
     };
 
     fetchCars();
+    const interval = setInterval(fetchCars, 5000); // Simulate real-time updates every 5 seconds
+
+    return () => clearInterval(interval);
   }, []);
 
   const bookCar = useCallback((carId, startDate, endDate) => {

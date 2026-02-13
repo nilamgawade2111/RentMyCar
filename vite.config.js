@@ -14,10 +14,11 @@ export default defineConfig({
         assetFileNames: 'assets/[name].[hash].[ext]'
       }
     },
-    // Ensure the build is optimized for Apache deployment
     assetsDir: 'assets',
     emptyOutDir: true,
     manifest: true,
     sourcemap: true
-  }
+  },
+  base: './', // Ensure relative paths for assets
+  publicDir: 'public', // Specify the directory for static assets
 });

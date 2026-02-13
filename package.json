@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "deploy": "npm run build && cp -r dist/* /var/www/html/rentmycar"
   },
   "dependencies": {
     "react": "^18.2.0",

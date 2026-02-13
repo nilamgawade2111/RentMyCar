@@ -1,4 +1,4 @@
-import { getAvailableCars, getBookings } from './mockData';
+import { getAvailableCars } from './mockData';
 
 /**
  * Simulates a real-time availability check for car bookings.
@@ -10,7 +10,10 @@ const availabilityCheck = async (startDate, endDate) => {
   return new Promise((resolve) => {
     const intervalId = setInterval(() => {
       const availableCars = getAvailableCars(startDate, endDate);
-      resolve(availableCars);
+      if (availableCars.length > 0) {
+        clearInterval(intervalId);
+        resolve(availableCars);
+      }
     }, 5000); // Simulate real-time check every 5 seconds
 
     // Cleanup interval on promise resolution

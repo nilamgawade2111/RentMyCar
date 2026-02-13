@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import PaymentGateway from './PaymentGateway';
 
+const mockCars = [
+  { id: 1, name: 'Toyota Camry', price: '$50/day', description: 'A reliable sedan', image: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537' },
+  { id: 2, name: 'Honda Accord', price: '$55/day', description: 'A comfortable ride', image: 'https://plus.unsplash.com/premium_photo-1664303847960-586318f59035' },
+  { id: 3, name: 'Ford Mustang', price: '$70/day', description: 'A sporty coupe', image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70' },
+];
+
 const UserVerification = ({ onVerificationSuccess }) => {
   const [isVerified, setIsVerified] = useState(false);
   const [verificationCode, setVerificationCode] = useState('');
@@ -102,7 +108,22 @@ const UserVerification = ({ onVerificationSuccess }) => {
       ) : (
         <div className="text-green-500 mb-4">Verification Successful!</div>
       )}
-      {isVerified && <PaymentGateway />}
+      {isVerified && (
+        <div>
+          <h3 className="text-xl font-bold mb-4 text-gray-800">Available Cars</h3>
+          <div className="grid grid-cols-1 gap-4">
+            {mockCars.map((car) => (
+              <div key={car.id} className="bg-gray-100 p-4 rounded-lg shadow">
+                <img src={car.image} alt={`Image of ${car.name}`} className="w-full h-32 object-cover rounded mb-2" />
+                <h4 className="text-lg font-bold text-gray-800">{car.name}</h4>
+                <p className="text-gray-600">{car.description}</p>
+                <p className="text-gray-800 font-semibold">{car.price}</p>
+              </div>
+            ))}
+          </div>
+          <PaymentGateway />
+        </div>
+      )}
     </div>
   );
 };

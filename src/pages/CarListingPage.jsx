@@ -8,7 +8,7 @@ function CarListingPage() {
   const cars = getAvailableCars();
 
   return (
-    <div className="bg-gradient-to-r from-[#0a0f2c] to-[#2c2c2c] min-h-screen flex flex-col justify-between">
+    <>
       <Banner />
       <main className="flex-grow container mx-auto px-4 py-8">
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -28,7 +28,7 @@ function CarListingPage() {
         </section>
       </main>
       <Footer />
-    </div>
+    </>
   );
 }
 

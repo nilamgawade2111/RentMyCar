@@ -19,5 +19,10 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     manifest: true,
+  },
+  resolve: {
+    alias: {
+      '@': '/src'
+    }
   }
 });

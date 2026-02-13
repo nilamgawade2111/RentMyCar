@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 
+const mockCars = [
+  { id: 1, name: 'Toyota Camry', price: '$50/day' },
+  { id: 2, name: 'Honda Accord', price: '$55/day' },
+  { id: 3, name: 'Ford Mustang', price: '$70/day' },
+];
+
 const PaymentGateway = () => {
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
@@ -8,13 +14,14 @@ const PaymentGateway = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [selectedCar, setSelectedCar] = useState(null);
 
   const handlePayment = () => {
     setIsProcessing(true);
     setError('');
 
     setTimeout(() => {
-      if (cardNumber && expiryDate && cvv && nameOnCard) {
+      if (cardNumber && expiryDate && cvv && nameOnCard && selectedCar) {
         setPaymentSuccess(true);
         setIsProcessing(false);
       } else {
@@ -27,6 +34,20 @@ const PaymentGateway = () => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
       <h2 className="text-2xl font-bold mb-4 text-gray-800">Payment Gateway</h2>
+      <div className="mb-4">
+        <label htmlFor="car-selection" className="block text-gray-700 mb-2">Select Car</label>
+        <select
+          id="car-selection"
+          value={selectedCar?.id || ''}
+          onChange={(e) => setSelectedCar(mockCars.find(car => car.id === parseInt(e.target.value)))}
+          className="w-full p-2 border border-gray-300 rounded"
+        >
+          <option value="" disabled>Select a car</option>
+          {mockCars.map(car => (
+            <option key={car.id} value={car.id}>{car.name} - {car.price}</option>
+          ))}
+        </select>
+      </div>
       <div className="mb-4">
         <label htmlFor="card-number" className="block text-gray-700 mb-2">Card Number</label>
         <input

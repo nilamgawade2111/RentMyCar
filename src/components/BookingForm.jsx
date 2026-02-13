@@ -10,6 +10,8 @@ const BookingForm = ({ car }) => {
   const [endDate, setEndDate] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
   const [error, setError] = useState('');
+  const [isVerified, setIsVerified] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
   const { isAvailable, loading, error: availabilityError } = useRealTimeAvailability(car.id, startDate, endDate);
 
   const calculatePrice = () => {
@@ -30,11 +32,11 @@ const BookingForm = ({ car }) => {
   };
 
   const handleBooking = () => {
-    if (isAvailable && startDate && endDate && totalPrice > 0) {
+    if (isAvailable && startDate && endDate && totalPrice > 0 && isVerified && paymentSuccess) {
       addBooking(car.id, startDate, endDate);
       alert('Booking confirmed!');
     } else {
-      alert('Selected dates are not available.');
+      alert('Please ensure all steps are completed and dates are available.');
     }
   };
 
@@ -74,15 +76,15 @@ const BookingForm = ({ car }) => {
       </div>
       {availabilityError && <p className="text-red-500 mb-4">{availabilityError}</p>}
       {!isAvailable && !loading && <p className="text-red-500 mb-4">Selected dates are not available.</p>}
+      <UserVerification onVerificationSuccess={() => setIsVerified(true)} />
+      <PaymentSimulation car={car} onPaymentSuccess={() => setPaymentSuccess(true)} />
       <button
         className={`bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-all duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-        disabled={!startDate || !endDate || totalPrice <= 0 || !isAvailable || loading}
+        disabled={!startDate || !endDate || totalPrice <= 0 || !isAvailable || loading || !isVerified || !paymentSuccess}
         onClick={handleBooking}
       >
         {loading ? 'Checking availability...' : 'Confirm Booking'}
       </button>
-      <UserVerification />
-      <PaymentSimulation car={car} />
     </div>
   );
 };

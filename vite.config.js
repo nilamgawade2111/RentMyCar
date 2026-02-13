@@ -14,7 +14,6 @@ export default defineConfig({
         assetFileNames: 'assets/[name].[ext]'
       }
     },
-    // Configure base path for Apache deployment
     base: '/rentmycar/',
   }
 });

@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { format, differenceInDays } from 'date-fns';
-import { addBooking } from '../utils/mockData';
-import useRealTimeAvailability from '../hooks/useRealTimeAvailability';
-import UserVerification from './UserVerification';
 
-const BookingForm = ({ car }) => {
+const PaymentSimulation = ({ car }) => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
   const [error, setError] = useState('');
-  const { isAvailable, loading, error: availabilityError } = useRealTimeAvailability(car.id, startDate, endDate);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const calculatePrice = () => {
     if (startDate && endDate) {
@@ -28,13 +26,12 @@ const BookingForm = ({ car }) => {
     }
   };
 
-  const handleBooking = () => {
-    if (isAvailable && startDate && endDate && totalPrice > 0) {
-      addBooking(car.id, startDate, endDate);
-      alert('Booking confirmed!');
-    } else {
-      alert('Selected dates are not available.');
-    }
+  const handlePayment = () => {
+    setIsProcessing(true);
+    setTimeout(() => {
+      setPaymentSuccess(true);
+      setIsProcessing(false);
+    }, 2000);
   };
 
   useEffect(() => {
@@ -43,7 +40,7 @@ const BookingForm = ({ car }) => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Book {car.name}</h2>
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">Payment Simulation for {car.name}</h2>
       <div className="mb-4">
         <label htmlFor="start-date" className="block text-gray-700 mb-2">Start Date</label>
         <input
@@ -68,18 +65,16 @@ const BookingForm = ({ car }) => {
       <div className="mb-4">
         <p className="text-lg font-semibold text-gray-800">Total Price: ${totalPrice.toFixed(2)}</p>
       </div>
-      {availabilityError && <p className="text-red-500 mb-4">{availabilityError}</p>}
-      {!isAvailable && !loading && <p className="text-red-500 mb-4">Selected dates are not available.</p>}
       <button
-        className={`bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-all duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-        disabled={!startDate || !endDate || totalPrice <= 0 || !isAvailable || loading}
-        onClick={handleBooking}
+        className={`bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-all duration-300 ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
+        disabled={!startDate || !endDate || totalPrice <= 0 || isProcessing}
+        onClick={handlePayment}
       >
-        {loading ? 'Checking availability...' : 'Confirm Booking'}
+        {isProcessing ? 'Processing...' : 'Simulate Payment'}
       </button>
-      <UserVerification />
+      {paymentSuccess && <p className="text-green-500 mt-4">Payment Simulation Successful!</p>}
     </div>
   );
 };
 
-export default BookingForm;
+export default PaymentSimulation;

@@ -57,3 +57,11 @@ spec:
           periodSeconds: 5
           failureThreshold: 6
           timeoutSeconds: 3
+        volumeMounts:
+        - name: apache-config
+          mountPath: /usr/local/apache2/conf/httpd.conf
+          subPath: httpd.conf
+      volumes:
+      - name: apache-config
+        configMap:
+          name: apache-config

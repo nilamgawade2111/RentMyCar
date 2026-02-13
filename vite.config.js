@@ -5,5 +5,14 @@ export default defineConfig({
   plugins: [react()],
   server: {
     allowedHosts: ['rentmycar.framework.autopath.ai', 'rentmycar.localhost', 'localhost']
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]'
+      }
+    }
   }
 });

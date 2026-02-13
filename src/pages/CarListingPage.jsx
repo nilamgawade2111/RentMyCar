@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Banner from '../components/Banner';
 import Footer from '../components/Footer';
+import CarList from '../components/CarList';
 import { getAvailableCars } from '../utils/mockData';
-import BookingForm from '../components/BookingForm';
 
 function CarListingPage() {
+  const [selectedCar, setSelectedCar] = useState(null);
   const cars = getAvailableCars();
+
+  const handleBookingRequest = (car) => {
+    setSelectedCar(car);
+    alert(`Booking request for ${car.name} has been initiated.`);
+  };
 
   return (
     <>
@@ -22,7 +28,12 @@ function CarListingPage() {
               <h2 className="text-2xl font-bold mb-2 text-gray-800">{car.name}</h2>
               <p className="text-lg text-gray-600 mb-4">{car.description}</p>
               <p className="text-lg font-semibold text-gray-800 mb-4">Price: {car.price}</p>
-              <BookingForm car={car} />
+              <button
+                className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-all duration-300"
+                onClick={() => handleBookingRequest(car)}
+              >
+                Book Now
+              </button>
             </article>
           ))}
         </section>

@@ -24,5 +24,8 @@ export default defineConfig({
     alias: {
       '@': '/src'
     }
+  },
+  esbuild: {
+    jsxInject: `import React from 'react'`
   }
 });

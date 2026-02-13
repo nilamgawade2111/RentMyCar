@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { differenceInDays } from 'date-fns';
 import UserVerification from './UserVerification';
 
-const PaymentSimulation = ({ car }) => {
+const PaymentSimulation = ({ car, onPaymentSuccess }) => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
@@ -37,6 +37,9 @@ const PaymentSimulation = ({ car }) => {
     setTimeout(() => {
       setPaymentSuccess(true);
       setIsProcessing(false);
+      if (onPaymentSuccess) {
+        onPaymentSuccess();
+      }
     }, 2000);
   };
 

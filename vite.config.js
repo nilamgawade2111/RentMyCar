@@ -13,6 +13,11 @@ export default defineConfig({
         chunkFileNames: 'assets/[name].[hash].js',
         assetFileNames: 'assets/[name].[hash].[ext]'
       }
-    }
+    },
+    // Ensure the build is optimized for Apache deployment
+    assetsDir: 'assets',
+    emptyOutDir: true,
+    manifest: true,
+    sourcemap: true
   }
 });

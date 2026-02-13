@@ -49,7 +49,7 @@ const BookingForm = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
+    <div className="bg-blue-500 p-6 rounded-lg shadow-md max-w-md mx-auto">
       <h2 className="text-2xl font-bold mb-4 text-gray-800">{car.name} Booking</h2>
       <div className="mb-4">
         <label htmlFor="user-name" className="block text-gray-700">Name</label>

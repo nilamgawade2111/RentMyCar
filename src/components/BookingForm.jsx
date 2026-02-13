@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import mockCars from '../data/mockCars';
 import PaymentGateway from './PaymentGateway';
 import UserVerification from './UserVerification';
+import DateSelector from './DateSelector';
+import PricingDisplay from './PricingDisplay';
 
 const BookingForm = () => {
   const { carId } = useParams();
@@ -18,15 +20,17 @@ const BookingForm = () => {
   const [isVerified, setIsVerified] = useState(false);
   const [availability, setAvailability] = useState(true);
 
+  const handleDatesChange = useCallback(({ startDate, endDate, totalPrice, availability }) => {
+    setStartDate(startDate);
+    setEndDate(endDate);
+    setTotalPrice(totalPrice);
+    setAvailability(availability);
+  }, []);
+
   useEffect(() => {
     const checkAvailability = () => {
       if (startDate && endDate) {
-        const days = Math.max(0, (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));
-        const pricePerDay = parseInt(car.price.replace('$', '').replace('/day', ''), 10);
-        setTotalPrice(days * pricePerDay);
-
-        // Mock availability check
-        const unavailableDates = ['2023-12-25', '2023-12-31']; // Example unavailable dates
+        const unavailableDates = ['2023-12-25', '2023-12-31'];
         const isUnavailable = unavailableDates.some(date => 
           new Date(date) >= new Date(startDate) && new Date(date) <= new Date(endDate)
         );
@@ -38,7 +42,7 @@ const BookingForm = () => {
     const interval = setInterval(checkAvailability, 5000);
 
     return () => clearInterval(interval);
-  }, [startDate, endDate, car.price]);
+  }, [startDate, endDate]);
 
   const handleBooking = () => {
     if (userName && userEmail && startDate && endDate && totalPrice > 0 && paymentMethod && isVerified && availability) {
@@ -80,26 +84,8 @@ const BookingForm = () => {
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
       </div>
-      <div className="mb-4">
-        <label htmlFor="start-date" className="block text-gray-700">Start Date</label>
-        <input
-          type="date"
-          id="start-date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="end-date" className="block text-gray-700">End Date</label>
-        <input
-          type="date"
-          id="end-date"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
+      <DateSelector car={car} onDatesChange={handleDatesChange} />
+      <PricingDisplay car={car} startDate={startDate} endDate={endDate} />
       {!availability && (
         <div className="mb-4 text-red-600">
           The selected dates are not available. Please choose different dates.
@@ -135,9 +121,6 @@ const BookingForm = () => {
         >
           Verify
         </button>
-      </div>
-      <div className="mb-4">
-        <p className="text-lg text-gray-800">Total Price: <span className="font-bold">${totalPrice}</span></p>
       </div>
       <button
         type="button"

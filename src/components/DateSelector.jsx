@@ -1,70 +1,63 @@
 import React, { useState, useEffect } from 'react';
-import { format, differenceInDays } from 'date-fns';
 
-const DateSelector = ({ car, onDatesSelected }) => {
+const DateSelector = ({ car, onDatesChange }) => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
-  const [error, setError] = useState('');
+  const [availability, setAvailability] = useState(true);
 
-  const calculatePrice = () => {
-    if (startDate && endDate) {
-      const start = new Date(startDate);
-      const end = new Date(endDate);
-      const days = differenceInDays(end, start);
+  useEffect(() => {
+    const calculateTotalPrice = () => {
+      if (startDate && endDate) {
+        const days = Math.max(0, (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));
+        setTotalPrice(days * car.pricePerDay);
 
-      if (days > 0) {
-        const pricePerDay = parseFloat(car.price.replace('$', '').replace('/day', ''));
-        setTotalPrice(days * pricePerDay);
-        setError('');
-      } else {
-        setTotalPrice(0);
-        setError('End date must be after start date.');
+        const unavailableDates = ['2023-12-25', '2023-12-31'];
+        const isUnavailable = unavailableDates.some(date => 
+          new Date(date) >= new Date(startDate) && new Date(date) <= new Date(endDate)
+        );
+        setAvailability(!isUnavailable);
       }
-    }
-  };
+    };
+
+    calculateTotalPrice();
+  }, [startDate, endDate, car.pricePerDay]);
 
   useEffect(() => {
-    calculatePrice();
-  }, [startDate, endDate]);
-
-  const handleDateChange = () => {
-    if (startDate && endDate && totalPrice > 0) {
-      onDatesSelected({ startDate, endDate, totalPrice });
-    }
-  };
-
-  useEffect(() => {
-    handleDateChange();
-  }, [totalPrice]);
+    onDatesChange({ startDate, endDate, totalPrice, availability });
+  }, [startDate, endDate, totalPrice, availability, onDatesChange]);
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Select Booking Dates for {car.name}</h2>
+    <div className="bg-white p-4 rounded-lg shadow-md">
       <div className="mb-4">
-        <label htmlFor="start-date" className="block text-gray-700 mb-2">Start Date</label>
+        <label htmlFor="start-date" className="block text-gray-700">Start Date</label>
         <input
           type="date"
           id="start-date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          aria-label="Start Date"
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="end-date" className="block text-gray-700 mb-2">End Date</label>
+        <label htmlFor="end-date" className="block text-gray-700">End Date</label>
         <input
           type="date"
           id="end-date"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-          min={startDate}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          aria-label="End Date"
         />
       </div>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+      {!availability && (
+        <div className="mb-4 text-red-600">
+          The selected dates are not available. Please choose different dates.
+        </div>
+      )}
       <div className="mb-4">
-        <p className="text-lg font-semibold text-gray-800">Total Price: ${totalPrice.toFixed(2)}</p>
+        <p className="text-lg text-gray-800">Total Price: <span className="font-bold">${totalPrice}</span></p>
       </div>
     </div>
   );

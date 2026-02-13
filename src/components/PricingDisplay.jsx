@@ -1,37 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import { differenceInDays } from 'date-fns';
+import PropTypes from 'prop-types';
 
 const PricingDisplay = ({ car, startDate, endDate }) => {
   const [totalPrice, setTotalPrice] = useState(0);
-  const [error, setError] = useState('');
+  const [availability, setAvailability] = useState(true);
 
   useEffect(() => {
-    if (startDate && endDate) {
-      const start = new Date(startDate);
-      const end = new Date(endDate);
-      const days = differenceInDays(end, start);
+    const calculateTotalPrice = () => {
+      if (startDate && endDate) {
+        const days = Math.max(0, (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));
+        setTotalPrice(days * car.pricePerDay);
 
-      if (days > 0) {
-        const pricePerDay = parseFloat(car.price.replace('$', '').replace('/day', ''));
-        setTotalPrice(days * pricePerDay);
-        setError('');
-      } else {
-        setTotalPrice(0);
-        setError('End date must be after start date.');
+        const unavailableDates = ['2023-12-25', '2023-12-31'];
+        const isUnavailable = unavailableDates.some(date => 
+          new Date(date) >= new Date(startDate) && new Date(date) <= new Date(endDate)
+        );
+        setAvailability(!isUnavailable);
       }
-    }
-  }, [startDate, endDate, car.price]);
+    };
+
+    calculateTotalPrice();
+  }, [startDate, endDate, car.pricePerDay]);
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Pricing Details for {car.name}</h2>
-      {error ? (
-        <p className="text-red-500 mb-4">{error}</p>
-      ) : (
-        <p className="text-lg font-semibold text-gray-800">Total Price: ${totalPrice.toFixed(2)}</p>
+    <div className="bg-white p-4 rounded-lg shadow-md">
+      <h2 className="text-xl font-bold text-gray-800 mb-4">{car.name} Pricing</h2>
+      <div className="mb-4">
+        <p className="text-lg text-gray-800">Total Price: <span className="font-bold">${totalPrice}</span></p>
+      </div>
+      {!availability && (
+        <div className="text-red-600">
+          The selected dates are not available. Please choose different dates.
+        </div>
       )}
     </div>
   );
+};
+
+PricingDisplay.propTypes = {
+  car: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    pricePerDay: PropTypes.number.isRequired,
+  }).isRequired,
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired,
 };
 
 export default PricingDisplay;

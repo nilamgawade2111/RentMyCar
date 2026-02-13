@@ -27,7 +27,8 @@ const useRealTimeAvailability = (carId, startDate, endDate) => {
     };
 
     if (startDate && endDate) {
-      checkAvailability();
+      const intervalId = setInterval(checkAvailability, 5000); // Simulate real-time check every 5 seconds
+      return () => clearInterval(intervalId); // Cleanup interval on component unmount
     }
   }, [carId, startDate, endDate]);
 

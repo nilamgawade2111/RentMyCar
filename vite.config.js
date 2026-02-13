@@ -13,6 +13,8 @@ export default defineConfig({
         chunkFileNames: 'assets/[name].js',
         assetFileNames: 'assets/[name].[ext]'
       }
-    }
+    },
+    // Configure base path for Apache deployment
+    base: '/rentmycar/',
   }
 });

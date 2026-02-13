@@ -35,6 +35,30 @@ const mockBookings = [
   },
 ];
 
+const mockPayments = [
+  {
+    bookingId: 1,
+    amount: 400,
+    status: 'success',
+  },
+  {
+    bookingId: 2,
+    amount: 400,
+    status: 'pending',
+  },
+];
+
+const mockUserVerifications = [
+  {
+    userId: 1,
+    isVerified: true,
+  },
+  {
+    userId: 2,
+    isVerified: false,
+  },
+];
+
 const getAvailableCars = (startDate, endDate) => {
   const availableCars = mockCars.filter(car => {
     const isBooked = mockBookings.some(booking =>
@@ -59,4 +83,12 @@ const getBookings = () => {
   return mockBookings;
 };
 
-export { getAvailableCars, getCarById, addBooking, getBookings };
+const getPaymentStatus = (bookingId) => {
+  return mockPayments.find(payment => payment.bookingId === bookingId)?.status ?? 'unknown';
+};
+
+const isUserVerified = (userId) => {
+  return mockUserVerifications.find(verification => verification.userId === userId)?.isVerified ?? false;
+};
+
+export { getAvailableCars, getCarById, addBooking, getBookings, getPaymentStatus, isUserVerified };

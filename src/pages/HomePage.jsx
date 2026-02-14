@@ -1,15 +1,25 @@
 import React from 'react';
-import Banner from '../components/Banner';
-import Footer from '../components/Footer';
+import FeaturedCars from '../components/FeaturedCars';
+import PlatformOverview from '../components/PlatformOverview';
 
-function HomePage() {
+const HomePage = () => {
   return (
-    <div className="bg-gradient-to-r from-[#0a0f2c] to-[#2c2c2c] min-h-screen flex flex-col justify-between">
-      <Banner />
-      {/* Other components and content */}
-      <Footer />
+    <div className="p-4">
+      <section className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome to RentMyCar</h1>
+        <p className="text-lg text-gray-600">
+          RentMyCar is your go-to platform for renting the best cars at affordable prices. Explore our featured cars and find the perfect ride for your needs.
+        </p>
+      </section>
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-6">Featured Cars</h2>
+        <FeaturedCars />
+      </section>
+      <section>
+        <PlatformOverview />
+      </section>
     </div>
   );
-}
+};
 
 export default HomePage;

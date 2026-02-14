@@ -4,8 +4,6 @@ import Footer from './components/Footer';
 import ContactUs from './components/ContactUs';
 import BookingPage from './components/BookingPage';
 import HomePage from './pages/HomePage';
-import PlatformOverview from './components/PlatformOverview';
-import FeaturedCars from './components/FeaturedCars';
 
 function App() {
   return (

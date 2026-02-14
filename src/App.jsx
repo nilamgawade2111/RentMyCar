@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer';
-import PlatformOverview from './components/PlatformOverview';
-import FeaturedCars from './components/FeaturedCars';
 import ContactUs from './components/ContactUs';
 import BookingPage from './components/BookingPage';
 import HomePage from './pages/HomePage';
+import PlatformOverview from './components/PlatformOverview';
+import FeaturedCars from './components/FeaturedCars';
 
 function App() {
   return (

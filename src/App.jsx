@@ -6,6 +6,7 @@ import ContactUs from './components/ContactUs';
 import BookingPage from './components/BookingPage';
 import Footer from './components/Footer';
 import CarList from './components/CarList';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <div className="text-center">
         <Banner />
         <Routes>
-          <Route path="/" element={<CarList />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/booking/:carId" element={<BookingPage />} />
           <Route path="/about" element={<div>About Page</div>} />

@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "postbuild": "cp -r dist/* /var/www/html/"
+    "postbuild": "cp -r dist/* /var/www/html/rentmycar"
   },
   "dependencies": {
     "react": "^18.2.0",

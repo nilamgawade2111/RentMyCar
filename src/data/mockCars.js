@@ -8,6 +8,7 @@ const mockCars = [
     available: true,
     features: ['Air Conditioning', 'Automatic Transmission', 'Bluetooth'],
     bookings: [],
+    featured: true,
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ const mockCars = [
     available: true,
     features: ['V8 Engine', 'Leather Seats', 'Bluetooth'],
     bookings: [],
+    featured: true,
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ const mockCars = [
     available: true,
     features: ['Electric', 'Autopilot', 'Bluetooth'],
     bookings: [],
+    featured: false,
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ const mockCars = [
     available: true,
     features: ['Luxury Interior', 'Sunroof', 'Bluetooth'],
     bookings: [],
+    featured: false,
   },
   {
     id: 5,
@@ -48,6 +52,29 @@ const mockCars = [
     available: true,
     features: ['4x4 Drive', 'Removable Roof', 'Bluetooth'],
     bookings: [],
+    featured: true,
+  },
+  {
+    id: 6,
+    name: 'Honda Civic',
+    pricePerDay: 50,
+    image: 'https://example.com/honda-civic.jpg',
+    description: 'A compact car with excellent fuel economy and reliability.',
+    available: true,
+    features: ['Air Conditioning', 'Manual Transmission', 'Bluetooth'],
+    bookings: [],
+    featured: false,
+  },
+  {
+    id: 7,
+    name: 'Chevrolet Camaro',
+    pricePerDay: 85,
+    image: 'https://example.com/chevrolet-camaro.jpg',
+    description: 'A stylish sports car with impressive performance.',
+    available: true,
+    features: ['V6 Engine', 'Convertible', 'Bluetooth'],
+    bookings: [],
+    featured: true,
   },
 ];
 

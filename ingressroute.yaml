@@ -10,7 +10,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`rentmycar.localhost`)
+    - match: Host(`rentmycar.localhost`) && PathPrefix(`/`)
       kind: Rule
       services:
         - name: rentmycar
@@ -29,7 +29,7 @@ spec:
         - name: default-compress
         - name: default-buffering
         - name: dev-headers
-    - match: Host(`rentmycar.framework.autopath.ai`)
+    - match: Host(`rentmycar.framework.autopath.ai`) && PathPrefix(`/`)
       kind: Rule
       services:
         - name: rentmycar
@@ -48,4 +48,3 @@ spec:
         - name: default-compress
         - name: default-buffering
         - name: default-headers
-

@@ -1,6 +1,4 @@
-# rentmycar Tiltfile
-# Auto-generated - paths are relative to this directory
-
+# rentmycar Tiltfile - runs in k8s/rentmycar/ directory
 docker_build(
     'rentmycar',
     '.',
@@ -18,9 +16,5 @@ k8s_yaml([
     './ingressroute.yaml',
 ])
 
-k8s_resource(
-    'rentmycar',
-    # Removed port_forwards - access via Traefik instead
-    auto_init=True,
-)
+k8s_resource('rentmycar', auto_init=True)
 

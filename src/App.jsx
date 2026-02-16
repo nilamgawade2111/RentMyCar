@@ -1,23 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Footer from './components/Footer';
-import ContactUs from './components/ContactUs';
-import BookingPage from './components/BookingPage';
 import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import ServicesPage from './pages/ServicesPage';
+import TermsPage from './pages/TermsPage';
 
 function App() {
   return (
     <Router>
-      <div className="text-center">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/contact" element={<ContactUs />} />
-          <Route path="/booking/:carId" element={<BookingPage />} />
-          <Route path="/about" element={<div>About Page</div>} />
-          <Route path="/services" element={<div>Services Page</div>} />
-        </Routes>
-        <Footer />
-      </div>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+      </Routes>
     </Router>
   );
 }

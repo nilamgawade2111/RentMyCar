@@ -1,22 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
-import ServicesPage from './pages/ServicesPage';
-import TermsPage from './pages/TermsPage';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/terms" element={<TermsPage />} />
-      </Routes>
-    </Router>
+    <div className="text-center">
+      <header className="bg-red-800 px-5 py-20 text-white min-h-screen flex flex-col items-center justify-center text-[calc(10px+2vmin)]">
+        <h1 className="text-4xl font-bold mb-4">Welcome to rentmycar</h1>
+        <p className="text-xl">Your React application is running!</p>
+      </header>
+    </div>
   );
 }
 
